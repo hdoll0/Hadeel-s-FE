@@ -1,0 +1,21 @@
+form {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+form input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 80%;
+  max-width: 500px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}

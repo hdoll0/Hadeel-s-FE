@@ -1,1 +1,31 @@
-/* styling for NavBar here */
+nav {
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+img {
+  height: 50px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.nav-icon {
+  color: black;
+  font-size: 2.5rem !important;
+  transition: color 0.3s;
+}
+
+.nav-icon:hover {
+  color: #e91e63;
+}
