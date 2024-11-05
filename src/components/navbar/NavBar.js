@@ -29,7 +29,7 @@ export default function NavBar(prop) {
             <FavoriteIcon className="nav-icon" />
           </Link>
         </Badge>
-        <Link to="/login">
+        <Link to="/signin">
           <Avatar alt="user icon" src={user} />
         </Link>
       </ul>

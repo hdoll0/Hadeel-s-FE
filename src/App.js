@@ -12,6 +12,10 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ErrorBoundary from "./components/ErrorBoundary";
 import WishListPage from "./pages/WishListPage";
+import UserRegister from "./components/user/UserRegister";
+import UserLogin from "./components/user/UserLogin";
+import UserProfile from "./components/user/UserProfile";
+import ProtectedRoute from "./components/user/ProtectedRoute";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -54,6 +58,37 @@ function App() {
   useEffect(() => {
     getProduct();
   }, [limit, offset, userInput, minPrice, maxPrice]);
+
+  const [userData, setUserData] = useState(null);
+  const [isUserDataLoading, setIsUserDataLoading] = useState(true);
+
+  function getUserData() {
+    setIsUserDataLoading(true);
+    const token = localStorage.getItem("token");
+
+    axios
+      .get("http://localhost:5125/api/v1/user/auth", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUserData(res.data);
+        setIsUserDataLoading(false);
+      })
+      .catch((err) => {
+        setIsUserDataLoading(false);
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  console.log(userData, "from App");
+
+  let isAuthenticated = userData ? true : false;
 
   if (loading) {
     return (
@@ -102,6 +137,18 @@ function App() {
         },
 
         { path: "*", element: <NotFoundPage message="Page not found" /> },
+        { path: "/signup", element: <UserRegister /> },
+        { path: "/signin", element: <UserLogin /> },
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              element={<UserProfile userData={userData} />}
+            />
+          ),
+        },
       ],
     },
   ]);
