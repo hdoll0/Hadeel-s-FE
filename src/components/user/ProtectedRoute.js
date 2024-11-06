@@ -11,7 +11,7 @@ export default function ProtectedRoute(prop) {
     shouldCheckAdmin,
   } = prop;
 
-  if (!isUserDataLoading) {
+  if (isUserDataLoading) {
     return (
       <div>
         <LinearProgress />

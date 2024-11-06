@@ -105,7 +105,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LayOut wishList={wishList} />,
+      element: <LayOut wishList={wishList} isAuthenticated={isAuthenticated} />,
       children: [
         { path: "/", element: <HomePage /> },
         {
@@ -138,14 +138,16 @@ function App() {
 
         { path: "*", element: <NotFoundPage message="Page not found" /> },
         { path: "/signup", element: <UserRegister /> },
-        { path: "/signin", element: <UserLogin /> },
+        { path: "/signin", element: <UserLogin getUserData={getUserData} /> },
         {
           path: "/profile",
           element: (
             <ProtectedRoute
               isUserDataLoading={isUserDataLoading}
               isAuthenticated={isAuthenticated}
-              element={<UserProfile userData={userData} />}
+              element={
+                <UserProfile userData={userData} setUserData={setUserData} />
+              }
             />
           ),
         },

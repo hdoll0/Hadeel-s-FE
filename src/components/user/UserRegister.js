@@ -55,10 +55,13 @@ export default function UserRegister() {
       .catch((err) => {
         console.log(err);
         if (err.response && err.response.status === 400) {
-          if (err.response.data.errors.EmailAddress) {
+          if (err.response.data.message) {
+            alert(err.response.data.message);
+          }
+          if (err.response.data.errors?.EmailAddress) {
             alert(err.response.data.errors.EmailAddress[0]);
           }
-          if (err.response.data.errors.Password) {
+          if (err.response.data.errors?.Password) {
             alert(err.response.data.errors.Password[0]);
           }
         }

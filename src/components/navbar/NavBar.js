@@ -5,13 +5,15 @@ import HomeIcon from "@mui/icons-material/Home";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
+import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 
 import logo from "../../images/work-in-progress.png";
 import user from "../../images/user.png";
+import profile from "../../images/profile.png";
 import "./NavBar.css";
 
 export default function NavBar(prop) {
-  const { wishList } = prop;
+  const { wishList, isAuthenticated } = prop;
   const arrayLength = wishList.length;
 
   return (
@@ -29,9 +31,22 @@ export default function NavBar(prop) {
             <FavoriteIcon className="nav-icon" />
           </Link>
         </Badge>
-        <Link to="/signin">
-          <Avatar alt="user icon" src={user} />
-        </Link>
+        {isAuthenticated ? (
+          <Link to="/profile">
+            <Avatar alt="user in" src={profile} />
+          </Link>
+        ) : (
+          <Link to="/signin">
+            <Avatar alt="user icon" src={user} />
+          </Link>
+        )}
+        {isAuthenticated ? (
+          <Link to="/dashboard">
+            <DashboardCustomizeOutlinedIcon className="nav-icon" />
+          </Link>
+        ) : (
+          <p className="hidden">Dashboard</p>
+        )}
       </ul>
     </nav>
   );

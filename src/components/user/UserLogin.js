@@ -60,7 +60,6 @@ export default function UserLogin(prop) {
         getUserData();
       })
       .then(() => {
-        console.log("Navigating to /profile");
         navigate("/profile");
       })
       .catch((error) => {});
