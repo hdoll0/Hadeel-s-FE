@@ -16,6 +16,10 @@ import UserRegister from "./components/user/UserRegister";
 import UserLogin from "./components/user/UserLogin";
 import UserProfile from "./components/user/UserProfile";
 import ProtectedRoute from "./components/user/ProtectedRoute";
+import DashBoard from "./components/dashboard/DashBoard";
+import ProductDashBoard from "./components/dashboard/ProductDashBoard";
+import CategoryDashBoard from "./components/dashboard/CategoryDashBoard";
+import UserDashBoard from "./components/dashboard/UserDashBoard";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -105,7 +109,13 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <LayOut wishList={wishList} isAuthenticated={isAuthenticated} />,
+      element: (
+        <LayOut
+          wishList={wishList}
+          isAuthenticated={isAuthenticated}
+          userData={userData}
+        />
+      ),
       children: [
         { path: "/", element: <HomePage /> },
         {
@@ -148,6 +158,54 @@ function App() {
               element={
                 <UserProfile userData={userData} setUserData={setUserData} />
               }
+            />
+          ),
+        },
+        {
+          path: "/dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={<DashBoard />}
+            />
+          ),
+        },
+        {
+          path: "/product-dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={<ProductDashBoard />}
+            />
+          ),
+        },
+        {
+          path: "/category-dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={<CategoryDashBoard />}
+            />
+          ),
+        },
+        {
+          path: "/user-dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={<UserDashBoard />}
             />
           ),
         },

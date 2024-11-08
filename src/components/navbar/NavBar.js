@@ -13,7 +13,7 @@ import profile from "../../images/profile.png";
 import "./NavBar.css";
 
 export default function NavBar(prop) {
-  const { wishList, isAuthenticated } = prop;
+  const { wishList, isAuthenticated, userData } = prop;
   const arrayLength = wishList.length;
 
   return (
@@ -23,14 +23,17 @@ export default function NavBar(prop) {
         <Link to="/">
           <HomeIcon className="nav-icon" />
         </Link>
+
         <Link to="/products">
           <CheckroomIcon className="nav-icon" />
         </Link>
+
         <Badge badgeContent={arrayLength} color="primary">
           <Link to="/wishList">
             <FavoriteIcon className="nav-icon" />
           </Link>
         </Badge>
+
         {isAuthenticated ? (
           <Link to="/profile">
             <Avatar alt="user in" src={profile} />
@@ -40,12 +43,13 @@ export default function NavBar(prop) {
             <Avatar alt="user icon" src={user} />
           </Link>
         )}
-        {isAuthenticated ? (
+
+        {isAuthenticated && userData.userRole === "Admin" ? (
           <Link to="/dashboard">
             <DashboardCustomizeOutlinedIcon className="nav-icon" />
           </Link>
         ) : (
-          <p className="hidden">Dashboard</p>
+          <p style={{ display: "none" }}>Dashboard</p>
         )}
       </ul>
     </nav>

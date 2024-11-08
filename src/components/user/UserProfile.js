@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 export default function UserProfile(prop) {
   const { userData, setUserData } = prop;
   console.log(userData, "userData from profile");
-  console.log("User ID:", userData.userID);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -63,15 +62,13 @@ export default function UserProfile(prop) {
       <p>Email: {userData.emailAddress}</p>
       <p>Name: {userData.name}</p>
       <p>Role: {userData.userRole}</p>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+      <Button aria-describedby={id} onClick={handleClick}>
         Edit
       </Button>
       <br />
-      <Button variant="contained" onClick={logOutHandler}>
-        Sign Out
-      </Button>
+      <Button onClick={logOutHandler}>Sign Out</Button>
       <br />
-      <Button variant="contained">
+      <Button>
         <Link to="/orders"> Order History</Link>
       </Button>
 

@@ -37,7 +37,7 @@ export default function Product(prop) {
 
   return (
     <div>
-      <img src={product.ImageUrl} alt={product.name} />
+      <img src={product.imageUrl} alt={product.name} />
       <p>{product.name}</p>
       <p>{product.price}$</p>
 

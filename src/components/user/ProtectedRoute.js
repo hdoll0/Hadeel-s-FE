@@ -20,7 +20,7 @@ export default function ProtectedRoute(prop) {
   }
 
   if (shouldCheckAdmin) {
-    return isAuthenticated && userData.role === "Admin" ? (
+    return isAuthenticated && userData.userRole === "Admin" ? (
       element
     ) : (
       <Navigate to="/signin" />
