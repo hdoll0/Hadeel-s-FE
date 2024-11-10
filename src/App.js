@@ -20,10 +20,22 @@ import DashBoard from "./components/dashboard/DashBoard";
 import ProductDashBoard from "./components/dashboard/ProductDashBoard";
 import CategoryDashBoard from "./components/dashboard/CategoryDashBoard";
 import UserDashBoard from "./components/dashboard/UserDashBoard";
+import CartPage from "./pages/CartPage";
+import UserOrderHistory from "./components/order/UserOrderHistory";
+import CouponsDashBoard from "./components/dashboard/CouponsDashBoard";
+import OrderDashBoard from "./components/dashboard/OrderDashBoard";
 
 function App() {
   const [userInput, setUserInput] = useState("");
-  const [wishList, setWishList] = useState([]);
+  const [wishList, setWishList] = useState(() => {
+    const savedWishList = localStorage.getItem("wishlist");
+    return savedWishList ? JSON.parse(savedWishList) : [];
+  });
+
+  const [cartList, setCartList] = useState(() => {
+    const savedCartList = localStorage.getItem("cartlist");
+    return savedCartList ? JSON.parse(savedCartList) : [];
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
@@ -94,6 +106,14 @@ function App() {
 
   let isAuthenticated = userData ? true : false;
 
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishList));
+  }, [wishList]);
+
+  useEffect(() => {
+    localStorage.setItem("cartlist", JSON.stringify(cartList));
+  }, [cartList]);
+
   if (loading) {
     return (
       <div>
@@ -114,6 +134,7 @@ function App() {
           wishList={wishList}
           isAuthenticated={isAuthenticated}
           userData={userData}
+          cartList={cartList}
         />
       ),
       children: [
@@ -132,6 +153,8 @@ function App() {
               handleChange={handleChange}
               setMinPrice={setMinPrice}
               setMaxPrice={setMaxPrice}
+              cartList={cartList}
+              setCartList={setCartList}
             />
           ),
         },
@@ -150,6 +173,16 @@ function App() {
         { path: "/signup", element: <UserRegister /> },
         { path: "/signin", element: <UserLogin getUserData={getUserData} /> },
         {
+          path: "/cart",
+          element: (
+            <CartPage
+              cartList={cartList}
+              setCartList={setCartList}
+              userData={userData}
+            />
+          ),
+        },
+        {
           path: "/profile",
           element: (
             <ProtectedRoute
@@ -161,6 +194,7 @@ function App() {
             />
           ),
         },
+        { path: "/orders", element: <UserOrderHistory userData={userData} /> },
         {
           path: "/dashboard",
           element: (
@@ -206,6 +240,30 @@ function App() {
               shouldCheckAdmin={true}
               userData={userData}
               element={<UserDashBoard />}
+            />
+          ),
+        },
+        {
+          path: "/Coupon-dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={<CouponsDashBoard />}
+            />
+          ),
+        },
+        {
+          path: "/order-dashboard",
+          element: (
+            <ProtectedRoute
+              isUserDataLoading={isUserDataLoading}
+              isAuthenticated={isAuthenticated}
+              shouldCheckAdmin={true}
+              userData={userData}
+              element={<OrderDashBoard userData={userData} />}
             />
           ),
         },

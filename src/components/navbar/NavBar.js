@@ -6,6 +6,7 @@ import CheckroomIcon from "@mui/icons-material/Checkroom";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 import logo from "../../images/work-in-progress.png";
 import user from "../../images/user.png";
@@ -13,8 +14,9 @@ import profile from "../../images/profile.png";
 import "./NavBar.css";
 
 export default function NavBar(prop) {
-  const { wishList, isAuthenticated, userData } = prop;
+  const { wishList, cartList, isAuthenticated, userData } = prop;
   const arrayLength = wishList.length;
+  const cartArrayLength = cartList.length;
 
   return (
     <nav className="navbar">
@@ -31,6 +33,12 @@ export default function NavBar(prop) {
         <Badge badgeContent={arrayLength} color="primary">
           <Link to="/wishList">
             <FavoriteIcon className="nav-icon" />
+          </Link>
+        </Badge>
+
+        <Badge badgeContent={cartArrayLength} color="primary">
+          <Link to="/cart">
+            <ShoppingBagOutlinedIcon className="nav-icon" />
           </Link>
         </Badge>
 

@@ -11,7 +11,10 @@ export default function DashBoard() {
       <Link to="/user-dashboard"> Users</Link>
       <br />
       <Link to="/category-dashboard"> Categories</Link>
-      <p> Orders</p>
+      <br />
+      <Link to="/Coupon-dashboard">Coupons</Link>
+      <br />
+      <Link to="/order-dashboard"> Orders</Link>
     </div>
   );
 }
