@@ -29,8 +29,10 @@ export default function ProductItem(prop) {
     <div>
       <img src={product.imageUrl} alt={product.name} />
       <p> {product.name}</p>
+      <br />
       <p> {product.description}</p>
-      <p> {product.price}</p>
+      <br />
+      <p> ${product.price}</p>
       <Button onClick={deleteProductById}> Delete</Button>
     </div>
   );

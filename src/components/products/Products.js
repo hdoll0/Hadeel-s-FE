@@ -1,6 +1,7 @@
 import React from "react";
 import Product from "./Product";
 import ProductsPagination from "./productsPagination";
+import "./Product.css";
 
 export default function Products(prop) {
   const {
@@ -16,7 +17,7 @@ export default function Products(prop) {
 
   return (
     <div>
-      <div className="productList">
+      <div className="product-list">
         {productList.map((product) => {
           return (
             <Product

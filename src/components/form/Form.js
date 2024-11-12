@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Form.css";
-
 export default function Form({ setUserInput }) {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
@@ -18,7 +17,7 @@ export default function Form({ setUserInput }) {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <input
         type="text"
         value={input}

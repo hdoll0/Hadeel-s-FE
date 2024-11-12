@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Rating from "@mui/material/Rating";
 import { Button } from "@mui/material";
+import "./Product.css";
 
 export default function Product(prop) {
   const [isFavorited, setIsFavorited] = useState(false);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(0);
   const { product, wishList, setWishList, cartList, setCartList } = prop;
+
+  useEffect(() => {
+    const inWishList = wishList.some((item) => item.id === product.id);
+    setIsFavorited(inWishList);
+  }, [wishList, product.id]);
 
   function addToFav(product) {
     const isInclude = wishList.some((item) => item.id === product.id);
@@ -32,10 +36,6 @@ export default function Product(prop) {
     setOpen(false);
   };
 
-  function getRating(event, newValue) {
-    setValue(newValue);
-  }
-
   function addToCart(product) {
     const isInclude = cartList.some((item) => item.id === product.id);
     if (!isInclude) {
@@ -45,7 +45,7 @@ export default function Product(prop) {
   console.log(cartList, "cart");
 
   return (
-    <div>
+    <div className="product-card">
       <img src={product.imageUrl} alt={product.name} />
       <p>{product.name}</p>
       <p>{product.price}$</p>
@@ -60,12 +60,15 @@ export default function Product(prop) {
         <ArrowForwardIosIcon />
       </Link>
       <br />
-      <Rating name="simple-controlled" value={value} onChange={getRating} />
       <Snackbar
         open={open}
         autoHideDuration={5000}
         onClose={handleClose}
-        message={`A ${product.name} is add to wish list`}
+        message={
+          isFavorited
+            ? `${product.name} added to wishlist`
+            : `${product.name} removed from wishlist`
+        }
       />
     </div>
   );

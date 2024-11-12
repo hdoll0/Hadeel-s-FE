@@ -8,6 +8,7 @@ import {
   FormControl,
 } from "@mui/material";
 import axios from "axios";
+import "./CategoryDashBoard.css";
 
 export default function CategoryDashBoard() {
   const [categories, setCategories] = useState([]);
@@ -98,31 +99,19 @@ export default function CategoryDashBoard() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      <h1>Category Dashboard</h1>
-      <Button variant="contained" onClick={(e) => handleClick(e)}>
+    <div className="category-dashboard">
+      <h1>Categories Dashboard</h1>
+      <Button
+        variant="contained"
+        onClick={(e) => handleClick(e)}
+        className="create-button"
+      >
         Create New Category
       </Button>
       <h2>List of Categories</h2>
-      <List style={{ width: "100%", maxWidth: "400px" }}>
+      <List className="category-list">
         {categories.map((category) => (
-          <ListItem
-            key={category.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              marginBottom: "16px",
-            }}
-          >
+          <ListItem key={category.id} className="category-item">
             <FormControl fullWidth>
               <p>{category.name}</p>
               <Button onClick={(e) => handleClick(e, category)}>Edit</Button>
@@ -141,7 +130,7 @@ export default function CategoryDashBoard() {
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <FormControl fullWidth style={{ padding: "16px" }}>
+        <FormControl fullWidth className="popover-content">
           <TextField
             name="name"
             label="Category Name"

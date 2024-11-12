@@ -3,6 +3,7 @@ import { IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Button } from "@mui/material";
+import "./CartList.css";
 
 export default function CartItem(prop) {
   const { cart, cartList, setCartList } = prop;
@@ -35,12 +36,12 @@ export default function CartItem(prop) {
   }
 
   return (
-    <div>
+    <div className="cart-item">
       <img src={cart.imageUrl} alt={cart.name} />
       <p>{cart.name}</p>
       <p>{cart.price}</p>
 
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div className="cart-item-quantity">
         <IconButton onClick={() => decreaseProductQuantity(cart.id)}>
           <RemoveIcon />
         </IconButton>
@@ -57,8 +58,12 @@ export default function CartItem(prop) {
           <AddIcon />
         </IconButton>
       </div>
-      <Button variant="outlined" onClick={() => removeProduct(cart)}>
-        Delete
+      <Button
+        color="primary"
+        onClick={() => removeProduct(cart)}
+        className="cartlist-item-buttons"
+      >
+        Remove
       </Button>
     </div>
   );

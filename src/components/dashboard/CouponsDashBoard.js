@@ -8,6 +8,7 @@ import {
   FormControl,
 } from "@mui/material";
 import axios from "axios";
+import "./CouponsDashBoard.css";
 
 export default function CouponsDashBoard() {
   const [coupons, setCoupons] = useState([]);
@@ -88,40 +89,23 @@ export default function CouponsDashBoard() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      <h1>Coupon Dashboard</h1>
-      <Button variant="contained" onClick={handleClick}>
+    <div className="coupon-dashboard">
+      <h1>Coupons Dashboard</h1>
+      <Button
+        variant="contained"
+        onClick={handleClick}
+        className="create-button"
+      >
         Create New Coupon
       </Button>
       <h2>List of Coupons</h2>
-      <List style={{ width: "100%", maxWidth: "400px" }}>
+      <List className="coupon-list">
         {coupons.map((coupon) => (
-          <ListItem
-            key={coupon.couponId}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              marginBottom: "16px",
-            }}
-          >
+          <ListItem key={coupon.couponId} className="coupon-item">
             <FormControl fullWidth>
               <p>Code: {coupon.code}</p>
               <p>Discount: {coupon.discountPercentage}%</p>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => deleteCoupon(coupon.couponId)}
-                style={{ marginTop: "8px" }}
-              >
+              <Button onClick={() => deleteCoupon(coupon.couponId)}>
                 Delete
               </Button>
             </FormControl>
@@ -136,7 +120,7 @@ export default function CouponsDashBoard() {
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <FormControl fullWidth style={{ padding: "16px" }}>
+        <FormControl fullWidth className="popover-content">
           <TextField
             name="code"
             label="Coupon Code"

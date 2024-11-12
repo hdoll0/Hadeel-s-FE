@@ -1,0 +1,9 @@
+.price-range-form {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.price-range-form .MuiTextField-root {
+  width: 100px;
+}

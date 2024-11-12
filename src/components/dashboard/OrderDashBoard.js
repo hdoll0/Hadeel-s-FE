@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import OrderItemDashBoard from "./OrderItemDashBoard";
+import "./OrderDashBoard.css";
 
 export default function OrderDashBoard(prop) {
   const { userData } = prop;
@@ -26,17 +36,34 @@ export default function OrderDashBoard(prop) {
   }
 
   return (
-    <div>
-      <h2>Order Dashboard</h2>
-      <div>
-        {orderList.length > 0 ? (
-          orderList.map((order) => (
-            <OrderItemDashBoard key={order.id} order={order} />
-          ))
-        ) : (
-          <p>No orders available.</p>
-        )}
-      </div>
+    <div className="order-dashboard">
+      <h2>Orders Dashboard</h2>
+      <TableContainer component={Paper} className="order-table">
+        <Table aria-label="orders table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Order ID</TableCell>
+              <TableCell>Original Price</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>User ID</TableCell>
+              <TableCell align="center">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {orderList.length > 0 ? (
+              orderList.map((order) => (
+                <OrderItemDashBoard key={order.id} order={order} />
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  No orders available.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

@@ -1,21 +1,26 @@
-form {
+.form-container {
   display: flex;
-  justify-content: center;
-  padding: 1rem 0;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-form input {
-  padding: 0.5rem;
-  font-size: 1rem;
-  width: 80%;
-  max-width: 500px;
+.form-container input {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  outline: none;
+}
+
+.form-container input:focus {
+  border-color: #1976d2;
 }
 
 .error-message {
   color: red;
-  font-size: 0.8rem;
-  text-align: center;
-  margin-top: 0.5rem;
+  font-size: 12px;
+  margin-top: 4px;
 }

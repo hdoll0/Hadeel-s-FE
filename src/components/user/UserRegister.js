@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./UserRegister.css";
 
 export default function UserRegister() {
   const [userInformation, setUserInformation] = useState({
@@ -68,13 +69,15 @@ export default function UserRegister() {
       });
   }
   return (
-    <div>
+    <div className="user-register-container">
+      <h2>Sign Up</h2>
       <TextField
         id="name"
         label="Name"
         variant="standard"
         helperText="Please enter your name"
         onChange={onchangeHandlerName}
+        className="user-register-field"
       />
       <br />
       <TextField
@@ -83,6 +86,7 @@ export default function UserRegister() {
         variant="standard"
         helperText="Please enter your email"
         onChange={onchangeHandlerEmail}
+        className="user-register-field"
       />
       <br />
       <TextField
@@ -91,6 +95,7 @@ export default function UserRegister() {
         variant="standard"
         helperText="Please enter your password"
         onChange={onchangeHandlerPassword}
+        className="user-register-field"
       />
       <br />
       <TextField
@@ -99,9 +104,13 @@ export default function UserRegister() {
         variant="standard"
         helperText="Please enter your phone number"
         onChange={onchangeHandlerPhone}
+        className="user-register-field"
       />
       <br />
-      <Button onClick={registerNewUser}> Sign Up</Button>
+      <Button onClick={registerNewUser} className="user-register-button">
+        {" "}
+        Sign Up
+      </Button>
     </div>
   );
 }

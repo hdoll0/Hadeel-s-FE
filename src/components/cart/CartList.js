@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
+import "./CartList.css";
 
 export default function CartList(prop) {
   const { cartList, setCartList, userData } = prop;
@@ -134,16 +135,18 @@ export default function CartList(prop) {
   }
 
   return (
-    <div>
-      {cartList.map((cart) => (
-        <CartItem
-          key={cart.id}
-          cart={cart}
-          cartList={cartList}
-          setCartList={setCartList}
-        />
-      ))}
-      <div>
+    <div className="cart-page-container">
+      <div className="cart-items">
+        {cartList.map((cart) => (
+          <CartItem
+            key={cart.id}
+            cart={cart}
+            cartList={cartList}
+            setCartList={setCartList}
+          />
+        ))}
+      </div>
+      <div className="cart-summary">
         <p>Subtotal: {subtotal.toFixed(2)}</p>
         <p>Discount: -{discountAmount.toFixed(2)}</p>
         <p>
@@ -151,16 +154,19 @@ export default function CartList(prop) {
         </p>
       </div>
 
-      <TextField
-        label="Coupon Code"
-        variant="outlined"
-        value={couponCode}
-        onChange={(e) => setCouponCode(e.target.value)}
-      />
-      <Button onClick={applyCoupon}>Apply Coupon</Button>
+      <div className="coupon-section">
+        <TextField
+          label="Coupon Code"
+          variant="outlined"
+          value={couponCode}
+          onChange={(e) => setCouponCode(e.target.value)}
+        />
+        <Button onClick={applyCoupon}>Apply Coupon</Button>
+      </div>
 
-      <h4>Select Payment Method:</h4>
-      <FormControl variant="outlined" fullWidth>
+      {/* <h4>Select Payment Method:</h4> */}
+      <div></div>
+      <FormControl variant="outlined" fullWidth style={{ marginTop: "20px" }}>
         <InputLabel>Payment Method</InputLabel>
         <Select
           value={paymentMethod}
@@ -170,11 +176,12 @@ export default function CartList(prop) {
           <MenuItem value="CreditCard">Credit Card</MenuItem>
           <MenuItem value="PayPal">PayPal</MenuItem>
           <MenuItem value="Cash">Cash</MenuItem>
-          {/* Add other methods as needed */}
         </Select>
       </FormControl>
 
-      <Button onClick={checkOut}>Checkout</Button>
+      <Button className="checkout-button" onClick={checkOut}>
+        Checkout
+      </Button>
     </div>
   );
 }

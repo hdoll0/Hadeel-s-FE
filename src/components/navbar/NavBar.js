@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Badge from "@mui/material/Badge";
-import HomeIcon from "@mui/icons-material/Home";
-import CheckroomIcon from "@mui/icons-material/Checkroom";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
-import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
-import logo from "../../images/work-in-progress.png";
+import home from "../../images/home.png";
+import heart from "../../images/heart.png";
+import dashboard from "../../images/dashboard.png";
+import bag from "../../images/shopping-bag.png";
+import shop from "../../images/manicure.png";
+import logo from "../../images/logo.png";
 import user from "../../images/user.png";
 import profile from "../../images/profile.png";
 import "./NavBar.css";
@@ -20,25 +20,26 @@ export default function NavBar(prop) {
 
   return (
     <nav className="navbar">
-      <img src={logo} alt="logo" />
+      <img src={logo} alt="logo" className="navbar-logo" />
+
       <ul className="nav-list">
         <Link to="/">
-          <HomeIcon className="nav-icon" />
+          <img src={home} alt="home" />
         </Link>
 
         <Link to="/products">
-          <CheckroomIcon className="nav-icon" />
+          <img src={shop} alt="shop" />
         </Link>
 
         <Badge badgeContent={arrayLength} color="primary">
           <Link to="/wishList">
-            <FavoriteIcon className="nav-icon" />
+            <img src={heart} alt="wishlist" />
           </Link>
         </Badge>
 
         <Badge badgeContent={cartArrayLength} color="primary">
           <Link to="/cart">
-            <ShoppingBagOutlinedIcon className="nav-icon" />
+            <img src={bag} alt="shopping bag" />
           </Link>
         </Badge>
 
@@ -54,7 +55,7 @@ export default function NavBar(prop) {
 
         {isAuthenticated && userData.userRole === "Admin" ? (
           <Link to="/dashboard">
-            <DashboardCustomizeOutlinedIcon className="nav-icon" />
+            <img src={dashboard} alt="dashboard" />
           </Link>
         ) : (
           <p style={{ display: "none" }}>Dashboard</p>

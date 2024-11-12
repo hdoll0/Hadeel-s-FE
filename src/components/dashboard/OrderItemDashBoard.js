@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import {
-  Card,
-  CardContent,
-  CardActions,
+  TableRow,
+  TableCell,
+  IconButton,
   Collapse,
   Typography,
+  Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import "./OrderDashBoard.css";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -30,44 +31,57 @@ export default function OrderItemDashBoard(prop) {
   };
 
   return (
-    <Card sx={{ width: "600px", marginTop: "20px" }}>
-      <CardContent>
-        <Typography variant="h6">Order ID: {order.id}</Typography>
-        <Typography>Original Price: ${order.originalPrice}</Typography>
-        <Typography>
-          Date: {new Date(order.createdAt).toLocaleDateString()}
-        </Typography>
-        <Typography>User ID: {order.userID}</Typography>
-      </CardContent>
-
-      <CardActions disableSpacing>
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography variant="subtitle1">Order Details:</Typography>
-          {order.orderDetails.map((item) => (
-            <div key={`${order.id}-${item.productId}`}>
-              <img
-                src={item.product.imageUrl}
-                alt={item.product.name}
-                style={{ width: "50px", height: "50px" }}
-              />
-              <p>Name: {item.product.name}</p>
-              <p>Quantity: {item.quantity}</p>
-              <p>Price: ${item.product.price}</p>
-            </div>
-          ))}
-        </CardContent>
-      </Collapse>
-    </Card>
+    <>
+      <TableRow>
+        <TableCell>{order.id}</TableCell>
+        <TableCell>${order.originalPrice}</TableCell>
+        <TableCell>{new Date(order.createdAt).toLocaleDateString()}</TableCell>
+        <TableCell>{order.userID}</TableCell>
+        <TableCell align="center">
+          <ExpandMore
+            expand={expanded}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0 }}>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Box margin={2}>
+              <Typography variant="subtitle1" gutterBottom>
+                Order Details
+              </Typography>
+              {order.orderDetails.map((item) => (
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  key={`${order.id}-${item.productId}`}
+                  className="order-detail-item"
+                >
+                  <img
+                    src={item.product.imageUrl}
+                    alt={item.product.name}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      marginRight: "10px",
+                    }}
+                  />
+                  <Typography variant="body2">
+                    {item.product.name} - Quantity: {item.quantity} - Price: $
+                    {item.product.price}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
   );
 }

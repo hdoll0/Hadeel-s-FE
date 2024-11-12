@@ -1,0 +1,60 @@
+.coupon-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.coupon-dashboard h1 {
+  font-size: 2em;
+  margin-bottom: 16px;
+}
+
+.create-button {
+  margin-bottom: 16px;
+}
+
+.coupon-list {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.coupon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.coupon-item p {
+  margin: 8px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.coupon-item button {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.popover-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popover-content .MuiTextField-root,
+.popover-content .MuiButton-root {
+  margin-top: 16px;
+}

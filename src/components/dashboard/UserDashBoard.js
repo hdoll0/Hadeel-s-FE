@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserItem from "./UserItem";
+import "./UserDashBoard.css";
 
 export default function UserDashBoard() {
   const [userList, setUserList] = useState([]);
@@ -21,18 +22,14 @@ export default function UserDashBoard() {
     fetchUserList();
   }, []);
   return (
-    <div>
-      <h1> User DashBoard</h1>
-      <div>
-        {userList.map((user) => {
-          return (
-            <UserItem
-              key={user.userID}
-              user={user}
-              fetchUserList={fetchUserList}
-            />
-          );
-        })}
+    <div className="user-dashboard">
+      <h1>Users Dashboard</h1>
+      <div className="user-list">
+        {userList.map((user) => (
+          <div key={user.userID} className="user-item">
+            <UserItem user={user} fetchUserList={fetchUserList} />
+          </div>
+        ))}
       </div>
     </div>
   );

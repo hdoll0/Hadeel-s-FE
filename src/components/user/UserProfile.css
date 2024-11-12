@@ -1,0 +1,63 @@
+.user-profile-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-profile-container h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.user-profile-container p {
+  font-size: 1rem;
+  color: #555;
+  margin: 8px 0;
+}
+
+.user-profile-container .MuiButton-root {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #1976d2;
+  color: white;
+}
+
+.user-profile-container .MuiButton-root:hover {
+  background-color: #1565c0;
+}
+
+.user-profile-edit-button {
+  background-color: #1976d2;
+  color: white;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.user-profile-popover {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-profile-popover .MuiTextField-root {
+  margin-bottom: 16px;
+}
+
+.user-profile-popover .MuiButton-root {
+  width: 100%;
+  background-color: #1976d2;
+  color: white;
+}
+
+.user-profile-popover .MuiButton-root:hover {
+  background-color: #1565c0;
+}

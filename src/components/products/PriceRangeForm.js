@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField } from "@mui/material";
+import "./PriceRangeForm.css";
 
 function PriceRangeForm(prop) {
   const { setMinPrice, setMaxPrice } = prop;
@@ -12,7 +13,7 @@ function PriceRangeForm(prop) {
     setMaxPrice(event.target.value);
   }
   return (
-    <div>
+    <div className="price-range-form">
       <TextField
         id="standard-basic-min"
         label="Min price"

@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import { LinearProgress } from "@mui/material";
 import NotFoundPage from "../../pages/NotFoundPage";
-
 import ProductItem from "./ProductItem";
 import ProductUpdate from "./ProductUpdate";
+import "./ProductDashBoard.css";
 
 export default function ProductDashBoard() {
   const [productResponse, setProductResponse] = useState({
@@ -125,22 +125,24 @@ export default function ProductDashBoard() {
   }
 
   return (
-    <div>
-      <div>
-        <h1> Product DashBoard </h1>
-        <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-          Create new product
-        </Button>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-        >
+    <div className="product-dashboard">
+      <h1>Products Dashboard</h1>
+      <Button
+        aria-describedby={id}
+        variant="contained"
+        className="create-button"
+        onClick={handleClick}
+      >
+        Create new product
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      >
+        <div className="popover-content">
           <TextField
             name="name"
             label="Name"
@@ -148,7 +150,6 @@ export default function ProductDashBoard() {
             helperText="please Enter The Product Name"
             onChange={onChangeHandler}
           />
-          <br />
           <TextField
             name="price"
             label="Price"
@@ -156,7 +157,6 @@ export default function ProductDashBoard() {
             helperText="please Enter The Product Price"
             onChange={onChangeHandler}
           />
-          <br />
           <TextField
             name="imageUrl"
             label="Image link"
@@ -164,7 +164,6 @@ export default function ProductDashBoard() {
             helperText="please Enter The Product Image URL"
             onChange={onChangeHandler}
           />
-          <br />
           <TextField
             name="description"
             label="Description"
@@ -172,43 +171,37 @@ export default function ProductDashBoard() {
             helperText="please Enter The Product Description"
             onChange={onChangeHandler}
           />
-          <br />
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+            <InputLabel>Category</InputLabel>
             <Select
               labelId="categoryId"
               name="categoryId"
               value={productInfo.categoryId}
-              label="Category Id"
               onChange={onChangeHandler}
             >
-              {categoryList.map((category) => {
-                return (
-                  <MenuItem key={category.id} value={category.id}>
-                    {category.name}
-                  </MenuItem>
-                );
-              })}
+              {categoryList.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
-
-          <Button onClick={createProduct}> Add Product</Button>
-        </Popover>
-
-        <h1> List of products</h1>
-        <div>
-          {productResponse.products.map((product) => (
-            <div key={product.id}>
-              <ProductItem product={product} fetchData={fetchData} />
-              <ProductUpdate
-                product={product}
-                fetchData={fetchData}
-                categoryList={categoryList}
-              />{" "}
-              {/* Product update button */}
-            </div>
-          ))}
+          <Button onClick={createProduct}>Add Product</Button>
         </div>
+      </Popover>
+
+      <h1>List of Products</h1>
+      <div className="product-list">
+        {productResponse.products.map((product) => (
+          <div key={product.id} className="product-item">
+            <ProductItem product={product} fetchData={fetchData} />
+            <ProductUpdate
+              product={product}
+              fetchData={fetchData}
+              categoryList={categoryList}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

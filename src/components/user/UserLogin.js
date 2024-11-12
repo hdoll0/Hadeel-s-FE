@@ -9,6 +9,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./UserLogin.css";
 //Hadeel@outlook.com
 //HhAa1234@@
 
@@ -65,7 +66,8 @@ export default function UserLogin(prop) {
       .catch((error) => {});
   }
   return (
-    <div>
+    <div className="user-login-container">
+      <h2>Sign In</h2>
       <br />
       <TextField
         id="email"
@@ -73,9 +75,10 @@ export default function UserLogin(prop) {
         variant="standard"
         helperText="Please enter your email"
         onChange={onchangeHandlerEmailSignIn}
+        className="user-login-field"
       />
       <br />
-      <FormControl variant="standard">
+      <FormControl variant="standard" className="user-login-field">
         <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
         <Input
           id="standard-adornment-password"
@@ -98,12 +101,15 @@ export default function UserLogin(prop) {
         />
       </FormControl>
       <br />
-      <Button onClick={signInExistingUser}> Sign In</Button>
+      <Button onClick={signInExistingUser} className="user-login-button">
+        {" "}
+        Sign In
+      </Button>
 
-      <div>
+      <div className="user-login-footer">
         <h1> Do not have an account yet?</h1>
-        <Link to={"/signup"}>
-          <Button> Create an account</Button>
+        <Link to="/signup">
+          <Button className="create-account-button"> Create an account</Button>
         </Link>
       </div>
       <br />

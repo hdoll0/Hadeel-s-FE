@@ -4,6 +4,7 @@ import Popover from "@mui/material/Popover";
 import { TextField } from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./UserProfile.css";
 
 export default function UserProfile(prop) {
   const { userData, setUserData } = prop;
@@ -57,19 +58,28 @@ export default function UserProfile(prop) {
   }
 
   return (
-    <div>
-      <p>Profile Here</p>
+    <div className="user-profile-container">
+      <h2>User Profile</h2>
       <p>Email: {userData.emailAddress}</p>
       <p>Name: {userData.name}</p>
       <p>Role: {userData.userRole}</p>
-      <Button aria-describedby={id} onClick={handleClick}>
+      <Button
+        aria-describedby={id}
+        onClick={handleClick}
+        className="user-profile-edit-button"
+      >
         Edit
       </Button>
       <br />
-      <Button onClick={logOutHandler}>Sign Out</Button>
+      <Button onClick={logOutHandler} className="user-profile-edit-button">
+        Sign Out
+      </Button>
       <br />
-      <Button>
-        <Link to="/orders"> Order History</Link>
+      <Button className="user-profile-edit-button">
+        <Link to="/orders" style={{ color: "inherit", textDecoration: "none" }}>
+          {" "}
+          Order History
+        </Link>
       </Button>
 
       <Popover
@@ -82,14 +92,16 @@ export default function UserProfile(prop) {
           horizontal: "left",
         }}
       >
-        <TextField
-          id="Name"
-          label="Name"
-          variant="standard"
-          helperText="Please Enter Your New Name"
-          onChange={onChangeHandlerName}
-        />
-        <Button onClick={updateUserProfile}> Edit </Button>
+        <div className="user-profile-popover">
+          <TextField
+            id="Name"
+            label="Name"
+            variant="standard"
+            helperText="Please Enter Your New Name"
+            onChange={onChangeHandlerName}
+          />
+          <Button onClick={updateUserProfile}> Edit </Button>
+        </div>
       </Popover>
     </div>
   );
