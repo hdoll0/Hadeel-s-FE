@@ -1,7 +1,7 @@
 import React from "react";
 import WishListItem from "../components/wishlist/WishListItem";
 
-function WishListPage(prop) {
+export default function WishListPage(prop) {
   const { wishList, setWishList } = prop;
   const removeItemWishList = (id) => {
     const updatedWishList = wishList.filter((item) => item.id !== id);
@@ -28,5 +28,3 @@ function WishListPage(prop) {
     </div>
   );
 }
-
-export default WishListPage;
