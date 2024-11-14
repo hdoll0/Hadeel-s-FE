@@ -1,0 +1,10 @@
+/* Layout.css or global CSS file */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Makes the layout fill at least the viewport height */
+}
+
+.content {
+  flex: 1; /* Expands the main content area to push the footer down */
+}

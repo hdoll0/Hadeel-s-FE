@@ -1,37 +1,12 @@
-.order-dashboard {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background-color: #f5f5f5;
+.order-table-container {
+  margin: 20px;
 }
 
-.order-dashboard h2 {
-  font-size: 2em;
-  margin-bottom: 16px;
-  text-align: center;
+.order-table-container .MuiTableCell-root {
+  padding: 16px;
 }
 
-.order-table {
-  margin-top: 20px;
-  max-width: 800px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.order-detail-item {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
-
-.order-detail-item img {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-  border-radius: 4px;
-}
-
-.order-detail-item p {
-  margin: 0;
+.order-table-container .MuiTypography-h6 {
+  font-weight: bold;
+  color: #333;
 }

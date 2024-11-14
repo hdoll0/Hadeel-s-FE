@@ -9,7 +9,11 @@ function WishListPage(prop) {
   };
 
   if (wishList.length === 0) {
-    return <h3>Wishlist Is Empty! </h3>;
+    return (
+      <div>
+        <h3>Wishlist Is Empty! </h3>
+      </div>
+    );
   }
 
   return (

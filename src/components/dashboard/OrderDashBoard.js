@@ -8,62 +8,145 @@ import {
   TableHead,
   TableRow,
   Paper,
+  IconButton,
+  Collapse,
+  Box,
+  Typography,
+  LinearProgress,
 } from "@mui/material";
-import OrderItemDashBoard from "./OrderItemDashBoard";
-import "./OrderDashBoard.css";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import NotFoundPage from "../../pages/NotFoundPage";
 
-export default function OrderDashBoard(prop) {
-  const { userData } = prop;
-  const [orderList, setOrderList] = useState([]);
+export default function OrderDashBoard() {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [openOrderId, setOpenOrderId] = useState(null);
 
   useEffect(() => {
-    if (userData?.userID) {
-      fetchOrdersForUser(userData.userID); // Fetch orders when userData is available
-    }
-  }, [userData]);
+    fetchOrdersForUser();
+  }, []);
 
-  // Fetch orders for the specific user using their userID
-  function fetchOrdersForUser(userID) {
+  function fetchOrdersForUser() {
     const token = localStorage.getItem("token");
     axios
-      .get(`http://localhost:5125/api/v1/order/user/${userID}`, {
+      .get("http://localhost:5125/api/v1/order", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => setOrderList(res.data)) // Directly set the orders for this user
-      .catch((error) => console.log(error));
+      .then((res) => {
+        setOrders(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError("Fetching Faild");
+        setLoading(false);
+      });
+  }
+
+  const toggleExpand = (orderId) => {
+    setOpenOrderId(openOrderId === orderId ? null : orderId);
+  };
+
+  if (loading) {
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <NotFoundPage message={error} />;
   }
 
   return (
-    <div className="order-dashboard">
-      <h2>Orders Dashboard</h2>
-      <TableContainer component={Paper} className="order-table">
-        <Table aria-label="orders table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Order ID</TableCell>
-              <TableCell>Original Price</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>User ID</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orderList.length > 0 ? (
-              orderList.map((order) => (
-                <OrderItemDashBoard key={order.id} order={order} />
-              ))
-            ) : (
+    <TableContainer component={Paper}>
+      <Table aria-label="orders table">
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell>Order ID</TableCell>
+            <TableCell>User ID</TableCell>
+            <TableCell>Original Price</TableCell>
+            <TableCell>Status</TableCell>
+            <TableCell>Created At</TableCell>
+            <TableCell>Estimated Arrival</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {orders.map((order) => (
+            <React.Fragment key={order.id}>
               <TableRow>
-                <TableCell colSpan={5} align="center">
-                  No orders available.
+                <TableCell>
+                  <IconButton
+                    aria-label="expand row"
+                    size="small"
+                    onClick={() => toggleExpand(order.id)}
+                  >
+                    {openOrderId === order.id ? (
+                      <KeyboardArrowUp />
+                    ) : (
+                      <KeyboardArrowDown />
+                    )}
+                  </IconButton>
+                </TableCell>
+                <TableCell>{order.id}</TableCell>
+                <TableCell>{order.userID}</TableCell>
+                <TableCell>${order.originalPrice.toFixed(2)}</TableCell>
+                <TableCell>{order.status}</TableCell>
+                <TableCell>
+                  {new Date(order.createdAt).toLocaleDateString()}
+                </TableCell>
+                <TableCell>
+                  {new Date(order.estimatedArrival).toLocaleDateString()}
                 </TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+              <TableRow>
+                <TableCell
+                  style={{ paddingBottom: 0, paddingTop: 0 }}
+                  colSpan={7}
+                >
+                  <Collapse
+                    in={openOrderId === order.id}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <Box margin={2}>
+                      <Typography variant="h6" gutterBottom component="div">
+                        Order Details
+                      </Typography>
+                      <Table size="small" aria-label="order details">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Product ID</TableCell>
+                            <TableCell>Product Name</TableCell>
+                            <TableCell>Quantity</TableCell>
+                            <TableCell>Price</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {order.orderDetails.map((detail) => (
+                            <TableRow key={detail.product.id}>
+                              <TableCell>{detail.product.id}</TableCell>
+                              <TableCell>{detail.product.name}</TableCell>
+                              <TableCell>{detail.quantity}</TableCell>
+                              <TableCell>
+                                ${detail.product.price.toFixed(2)}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </Box>
+                  </Collapse>
+                </TableCell>
+              </TableRow>
+            </React.Fragment>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

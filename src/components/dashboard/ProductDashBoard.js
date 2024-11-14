@@ -102,7 +102,7 @@ export default function ProductDashBoard() {
       })
       .then((res) => {
         console.log(res);
-        if (res.status === 200) {
+        if (res.status === 201) {
           alert("Product Is Created Successfully!");
           fetchData();
         }

@@ -10,7 +10,6 @@ import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import ErrorBoundary from "./components/ErrorBoundary";
 import WishListPage from "./pages/WishListPage";
 import UserRegister from "./components/user/UserRegister";
 import UserLogin from "./components/user/UserLogin";
@@ -22,7 +21,6 @@ import CategoryDashBoard from "./components/dashboard/CategoryDashBoard";
 import UserDashBoard from "./components/dashboard/UserDashBoard";
 import CartPage from "./pages/CartPage";
 import UserOrderHistory from "./components/order/UserOrderHistory";
-import CouponsDashBoard from "./components/dashboard/CouponsDashBoard";
 import OrderDashBoard from "./components/dashboard/OrderDashBoard";
 
 function App() {
@@ -42,7 +40,6 @@ function App() {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(1000);
 
-  console.log(minPrice, maxPrice, "price");
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -61,7 +58,6 @@ function App() {
     axios
       .get(productUrl)
       .then((response) => {
-        console.log(response);
         setProductResponse(response.data);
         setLoading(false);
       })
@@ -244,18 +240,6 @@ function App() {
           ),
         },
         {
-          path: "/Coupon-dashboard",
-          element: (
-            <ProtectedRoute
-              isUserDataLoading={isUserDataLoading}
-              isAuthenticated={isAuthenticated}
-              shouldCheckAdmin={true}
-              userData={userData}
-              element={<CouponsDashBoard />}
-            />
-          ),
-        },
-        {
           path: "/order-dashboard",
           element: (
             <ProtectedRoute
@@ -273,9 +257,7 @@ function App() {
 
   return (
     <div className="App">
-      <ErrorBoundary>
-        <RouterProvider router={router} />
-      </ErrorBoundary>
+      <RouterProvider router={router} />
     </div>
   );
 }

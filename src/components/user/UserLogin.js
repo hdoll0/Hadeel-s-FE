@@ -63,7 +63,23 @@ export default function UserLogin(prop) {
       .then(() => {
         navigate("/profile");
       })
-      .catch((error) => {});
+      .catch((err) => {
+        console.log(err);
+        if (
+          (err.response && err.response.status === 400) ||
+          (err.response && err.response.status === 401)
+        ) {
+          if (err.response.data.message) {
+            alert(err.response.data.message);
+          }
+          if (err.response.data.errors?.EmailAddress) {
+            alert(err.response.data.errors.EmailAddress[0]);
+          }
+          if (err.response.data.errors?.Password) {
+            alert(err.response.data.errors.Password[0]);
+          }
+        }
+      });
   }
   return (
     <div className="user-login-container">

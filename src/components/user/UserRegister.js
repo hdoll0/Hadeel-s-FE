@@ -50,7 +50,7 @@ export default function UserRegister() {
       .then((res) => {
         console.log(res, "response from post");
         if (res.status === 201) {
-          navigate("/signup");
+          navigate("/signin");
         }
       })
       .catch((err) => {

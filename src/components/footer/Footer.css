@@ -1,0 +1,51 @@
+/* Footer Section */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+.footer p {
+  margin: 10px 0;
+}
+
+.footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: rgb(249, 249, 249);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}
+
+/* Social Media Container */
+.social-media {
+  display: flex;
+  justify-content: left;
+  padding: 5px 0;
+}
+
+/* Social Media Icon Links */
+.social-media a {
+  margin: 0 10px;
+}
+
+/* Styling the images */
+.social-media img {
+  width: 30px;
+  height: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover effect on icons */
+.social-media img:hover {
+  transform: scale(1.1);
+}

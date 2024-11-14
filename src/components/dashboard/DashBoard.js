@@ -53,15 +53,6 @@ export default function DashBoard() {
         </Button>
         <Button
           component={Link}
-          to="/coupon-dashboard"
-          variant="contained"
-          color="primary"
-          fullWidth
-        >
-          Coupons
-        </Button>
-        <Button
-          component={Link}
           to="/order-dashboard"
           variant="contained"
           color="primary"
